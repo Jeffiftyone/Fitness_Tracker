@@ -70,12 +70,9 @@ app.get("/api/workouts/range", (req, res) => {
     let ObjectId=mongoose.Types.ObjectId(req.params.id);
     db.Workout.findByIdAndUpdate(
       {ObjectId},
+        {$push: {exercises: [req.body]}
+        },
         {
-            $push: {
-                exercises: [req.body]
-            }
-            
-        }, {
             upsert: true
         },
         (error, data) => {
