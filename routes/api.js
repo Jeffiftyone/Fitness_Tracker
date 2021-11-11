@@ -1,18 +1,9 @@
 const router = require("express").Router();
 const Workout = require("../models/Workout.js");
-const { route } = require("./htmlRoutes.js");
 
-// db.Workout.create({ name: "Workout Tracker" })
-//   .then(dbWorkout => {
-//     console.log(dbWorkout);
-//   })
-//   .catch(({message}) => {
-//     console.log(message);
-//   });
-
-router.post("/api/workouts", ({body}, res) => {
-  db.Exercise.create(body)
-    .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
+//post
+router.post("/api/workouts", (req, res) => {
+  Workout.create({})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -21,50 +12,57 @@ router.post("/api/workouts", ({body}, res) => {
     });
 });
 
-router.get("/api/workouts/range", (req, res) => {
- 
-   (error, data) => {
-      if (error) {
-          res.send(error);
-      } else {
-          res.json(data);
-      }
+//get
+router.get("/api/workouts", (req, res)=>{
+  Workout.aggregate([ {
+    $addFields: {
+    totalDuration:{
+      $sum: '$exercises.duration'
     }
+   }
+  }
+]).then((workout)=>{
+    console.log('get api', workout)
+    res.json(workout);
+  }).catch((e) => {
+    res.json(e)
+  })
+});
+
+//put
+router.put("/api/workouts/:id", (req, res) => {
+  Workout.findByIdAndUpdate(
+    req.params.id,
+      {
+        $push: {exercises: req.body}
+      },{
+        new: true, runValidators: true
+        })
+        .then((workout)=>{
+          res.json(workout)
+        })
+        .catch((err)=>{
+          res.json(err)
+        })
   });
 
-  router.put("/api/workouts/:id", (req, res) => {
-    let ObjectId=mongoose.Types.ObjectId(req.params.id);
-    db.Workout.findByIdAndUpdate(
-      {ObjectId},
-        {$push: {exercises: [req.body]}
-        },
-        {
-            upsert: true
-        },
-        (error, data) => {
-            if (error) {
-                console.log(error);
-                res.send(error);
-            } else {
-                console.log(data)
-                res.send(data);
-            }
-        }
-    );
-});
 
-router.get("/find/:id", (req, res) => {
-  db.Workout.findOne(
+router.get(`/api/workouts/range`, (req, res) => {
+  Workout.aggregate([
       {
-          _id: mongoose.Types.ObjectId(req.params.id)
-      },
-      (error, data) => {
-          if (error) {
-              res.send(error);
-          } else {
-              res.send(data);
+          $addFields: {
+              totalDuration:
+                  { $sum: '$exercises.duration' },
+              totalWeight:
+                  { $sum: '$exercises.weight' }
           }
       }
-  );
+  ]).then((workout) => {
+          console.log('', workout);
+          res.json(workout)
+      }).catch((e) => {
+          res.json(e)
+      })
 });
+
 module.exports = router;
