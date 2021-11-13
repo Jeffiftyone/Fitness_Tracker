@@ -1,5 +1,4 @@
 # Fitness_Tracker
-=============================
 
 ## Description
 An application that is able to show statistical data of workouts, given input from the user. The user is able to create new workout sessions, as well as
