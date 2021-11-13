@@ -26,11 +26,9 @@ Add new exercises to a new workout plan.
 ![lastWorkout](./public/Images/lastWorkout.PNG)
 ![Dashboard](./public/Images/Dashboard.PNG)
 
-
+## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 This project is licensed under the MIT license.
-
-
 
 ## Link
 App: https://jeffiftyone-fitnesstracker.herokuapp.com/  
