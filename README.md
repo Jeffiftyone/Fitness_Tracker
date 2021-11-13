@@ -2,7 +2,8 @@
 =============================
 
 ## Description
-An application that tracks Workouts using MongoDB, Express
+An application that is able to show statistical data of workouts, given input from the user. The user is able to create new workout sessions, as well as
+continue their previous session. Main tehnologies used are MongoDB Atlas, Express
 
 ## Table of Contents
 * [Usage](#usage)
@@ -27,7 +28,7 @@ Add new exercises to a new workout plan.
 ![Dashboard](./public/Images/Dashboard.PNG)
 
 ## License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 This project is licensed under the MIT license.
 
 ## Link
