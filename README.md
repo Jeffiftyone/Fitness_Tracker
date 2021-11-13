@@ -27,10 +27,9 @@ Add new exercises to a new workout plan.
 ![Dashboard](./public/Images/Dashboard.PNG)
 
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+This project is licensed under the MIT license.
 
-
-## License
-No License. 
 
 
 ## Link
